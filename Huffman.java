@@ -3,10 +3,8 @@ import java.util.*;
 // node class is the basic structure
 // of each node present in the Huffman - tree.
 class HuffmanNode {
-
-    int data;
-    char c;
-
+    int data;//nbr d'occurences de c
+    char c;//charactere
     HuffmanNode left;
     HuffmanNode right;
 }
@@ -14,24 +12,24 @@ class HuffmanNode {
 class MyComparator implements Comparator<HuffmanNode> {
     public int compare(HuffmanNode x, HuffmanNode y)
     {
-
         return x.data - y.data;
     }
 }
+
 public class Huffman{
-// c'est une fonction recursive
+
+    // c'est une fonction recursive qui parcour l'arbre et donne le codage de chaque charactere
     public static void printCode(HuffmanNode root, String s){
         // si root.left et root.right sont null
-
         if (root.left == null && root.right == null && Character.isLetter(root.c)) {
             System.out.println(root.c + ":" + s);
             return;
         }
-
-
         printCode(root.left, s + "0");
         printCode(root.right, s + "1");
     }
+
+    //fonction qui trie les valeurs de Hashmap
     public static HashMap<Character, Integer> sortByValue(HashMap<Character, Integer> hm)
     {
         List<Map.Entry<Character, Integer> > list = new LinkedList<Map.Entry<Character, Integer> >(hm.entrySet());
@@ -52,13 +50,14 @@ public class Huffman{
         }
         return temp;
     }
+
+    //fonction qui donne le nombre d'occurences de chaque charactere stocke dans un dictionnaire (Hashmap)
     private static HashMap<Character, Integer> CountChar(String str,int n){
         Character ch;
         Integer weight;
         HashMap<Character, Integer> CountChar=new HashMap<Character,Integer>();
         for (int i=0; i<n; i++){
         ch = str.charAt(i);
-        //if(ch==' '){continue;}
         if (CountChar.containsKey(ch) == false)
         weight = 1;
         else
@@ -69,69 +68,63 @@ public class Huffman{
     }
     public static void main(String[]args){
         Scanner s = new Scanner(System.in);
+        System.out.println("donner une chaîne de caracteres à compresser en utilisant l'algorithme de Huffman:");
         String str=s.nextLine();
-        //System.out.println(str);
         // number of characters.
         int n = str.length();
         HashMap<Character, Integer> HashOfStr=CountChar(str,n);
+        //C'est une map qui liee a chaque charactere son nombre d'occurences dans str
         HashMap<Character, Integer> HashOfStrSorted=sortByValue(HashOfStr);
-        int nn=HashOfStr.size();
-        //char[] charArray = { 'a', 'b', 'c', 'd', 'e', 'f' };
-        //int[] charfreq = { 5, 9, 12, 13, 16, 45 };
 
+        int lenOFHashMap=HashOfStr.size();
         // creating a priority queue q.
         // makes a min-priority queue(min-heap).
         PriorityQueue<HuffmanNode> q = new PriorityQueue<HuffmanNode>(n, new MyComparator());
 
         for (Character ch : HashOfStrSorted.keySet()) {
-
-        // creating a Huffman node object
-        // and add it to the priority queue.
-        HuffmanNode hn = new HuffmanNode();
-
-        hn.c = ch;
-        hn.data = HashOfStrSorted.get(ch);
-        System.out.println(ch+" "+ hn.data);
-        hn.left = null;
-        hn.right = null;
-
-        // add functions adds
-        // the huffman node to the queue.
-        q.add(hn);
+            // creating a Huffman node object
+            // and add it to the priority queue.
+            HuffmanNode hn = new HuffmanNode();
+            hn.c = ch;
+            hn.data = HashOfStrSorted.get(ch);
+            System.out.println(ch+" "+ hn.data);
+            hn.left = null;
+            hn.right = null;
+            // add functions adds
+            // the huffman node to the queue.
+            q.add(hn);
         }
-
         // create a root node
         HuffmanNode root = null;
-
         // Here we will extract the two minimum value
         // from the heap each time until
         // its size reduces to 1, extract until
         // all the nodes are extracted.
         while (q.size() > 1) {
 
-        // first min extract.
-        HuffmanNode x = q.peek();
-        q.poll();
+            // first min extract.
+            HuffmanNode x = q.peek();
+            q.poll();
 
-        // second min extract.
-        HuffmanNode y = q.peek();
-        q.poll();
+            // second min extract.
+            HuffmanNode y = q.peek();
+            q.poll();
 
-        // new node f which is equal
-        HuffmanNode f = new HuffmanNode();
+            // new node f which is equal
+            HuffmanNode f = new HuffmanNode();
 
-        // to the sum of the frequency of the two nodes
-        // assigning values to the f node.
-        f.data = x.data + y.data;
-        f.c = '-';
+            // to the sum of the frequency of the two nodes
+            // assigning values to the f node.
+            f.data = x.data + y.data;
+            f.c = '-';
 
-        // first extracted node as left child.
-        f.left = x;
-        // second extracted node as the right child.
-        f.right = y;
-        root = f;
-        q.add(f);
+            // first extracted node as left child.
+            f.left = x;
+            // second extracted node as the right child.
+            f.right = y;
+            root = f;
+            q.add(f);
         }
         printCode(root, "");
-        }
+    }
 }
