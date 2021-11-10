@@ -8,3 +8,15 @@ class HuffmanNode {
     HuffmanNode left;
     HuffmanNode right;
 }
+class MyComparator implements Comparator<HuffmanNode> {
+    public int compare(HuffmanNode x, HuffmanNode y)
+    {
+
+        return x.data - y.data;
+    }
+}
+class public Huffman{
+    public static void main(String[]args){
+
+    }
+}
