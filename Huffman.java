@@ -31,7 +31,14 @@ public static void printCode(HuffmanNode root, String s)
         printCode(root.right, s + "1");
         }
 
-    public static void main(String[]args){
+    public static void main(String[]args){ 
+        int n = 6;
+        
+        char[] charArray = { 'a', 'b', 'c', 'd', 'e', 'f' };
+        
+        int[] charfreq = { 5, 9, 12, 13, 16, 45 } ; 
+        
+        PriorityQueue<HuffmanNode> q = new PriorityQueue<HuffmanNode>(n, new MyComparator());
 
     }
 }
