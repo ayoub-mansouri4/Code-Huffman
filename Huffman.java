@@ -55,8 +55,9 @@ class public Huffman{
             hn.right = null;
             q.add(hn);
         }
+//créer un root
         HuffmanNode root = null;
-
+//extraction des deux valeurs minimal
         while (q.size() > 1) {
 
 
