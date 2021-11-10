@@ -1,6 +1,4 @@
-import java.util.PriorityQueue;
-import java.util.Scanner;
-import java.util.Comparator;
+import java.util.*;
 
 // node class is the basic structure
 // of each node present in the Huffman - tree.
@@ -35,58 +33,71 @@ class public Huffman{
         printCode(root.right, s + "1");
     }
 
-    public static void main(String[]args){ 
-        int n = 6;
-        
-        char[] charArray = { 'a', 'b', 'c', 'd', 'e', 'f' };
-        
-        int[] charfreq = { 5, 9, 12, 13, 16, 45 } ; 
-        
+    public static void main(String[]args){
+        Scanner s = new Scanner(System.in);
+        String str=s.nextLine();
+        //System.out.println(str);
+        // number of characters.
+        int n = str.length();
+        HashMap<Character, Integer> HashOfStr=CountChar(str,n);
+        HashMap<Character, Integer> HashOfStrSorted=sortByValue(HashOfStr);
+        int nn=HashOfStr.size();
+        //char[] charArray = { 'a', 'b', 'c', 'd', 'e', 'f' };
+        //int[] charfreq = { 5, 9, 12, 13, 16, 45 };
+
+        // creating a priority queue q.
+        // makes a min-priority queue(min-heap).
         PriorityQueue<HuffmanNode> q = new PriorityQueue<HuffmanNode>(n, new MyComparator());
-        
-        for (int i = 0; i < n; i++) {
 
-            HuffmanNode hn = new HuffmanNode();
+        for (Character ch : HashOfStrSorted.keySet()) {
 
-            hn.c = charArray[i];
-            hn.data = charfreq[i];
+        // creating a Huffman node object
+        // and add it to the priority queue.
+        HuffmanNode hn = new HuffmanNode();
 
-            hn.left = null;
-            hn.right = null;
-            q.add(hn);
+        hn.c = ch;
+        hn.data = HashOfStrSorted.get(ch);
+        System.out.println(ch+" "+ hn.data);
+        hn.left = null;
+        hn.right = null;
+
+        // add functions adds
+        // the huffman node to the queue.
+        q.add(hn);
         }
-//créer un root
+
+        // create a root node
         HuffmanNode root = null;
-//extraction des deux valeurs minimal
+
+        // Here we will extract the two minimum value
+        // from the heap each time until
+        // its size reduces to 1, extract until
+        // all the nodes are extracted.
         while (q.size() > 1) {
 
+        // first min extract.
+        HuffmanNode x = q.peek();
+        q.poll();
 
-            HuffmanNode x = q.peek();
-            q.poll();
+        // second min extract.
+        HuffmanNode y = q.peek();
+        q.poll();
 
+        // new node f which is equal
+        HuffmanNode f = new HuffmanNode();
 
-            HuffmanNode y = q.peek();
-            q.poll();
+        // to the sum of the frequency of the two nodes
+        // assigning values to the f node.
+        f.data = x.data + y.data;
+        f.c = '-';
 
-            HuffmanNode f = new HuffmanNode();
-
-            
-            f.data = x.data + y.data;
-            f.c = '-';
-
-
-            f.left = x;
-
-
-            f.right = y;
-
-
-            root = f;
-
-            
-            q.add(f);
+        // first extracted node as left child.
+        f.left = x;
+        // second extracted node as the right child.
+        f.right = y;
+        root = f;
+        q.add(f);
         }
         printCode(root, "");
-
-    }
+        }
 }
