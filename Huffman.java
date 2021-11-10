@@ -1,3 +1,7 @@
+import java.util.PriorityQueue;
+import java.util.Scanner;
+import java.util.Comparator;
+
 // node class is the basic structure
 // of each node present in the Huffman - tree.
 class HuffmanNode {
