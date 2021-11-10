@@ -18,7 +18,7 @@ class MyComparator implements Comparator<HuffmanNode> {
         return x.data - y.data;
     }
 }
-class public Huffman{
+public class Huffman{
 // c'est une fonction recursive
     public static void printCode(HuffmanNode root, String s){
         // si root.left et root.right sont null
@@ -32,7 +32,41 @@ class public Huffman{
         printCode(root.left, s + "0");
         printCode(root.right, s + "1");
     }
+    public static HashMap<Character, Integer> sortByValue(HashMap<Character, Integer> hm)
+    {
+        List<Map.Entry<Character, Integer> > list = new LinkedList<Map.Entry<Character, Integer> >(hm.entrySet());
 
+        // Sort the list
+        Collections.sort(list, new Comparator<Map.Entry<Character, Integer> >() {
+            public int compare(Map.Entry<Character, Integer> o1,
+                               Map.Entry<Character, Integer> o2)
+            {
+                return (o1.getValue()).compareTo(o2.getValue());
+            }
+        });
+
+        // put data from sorted list to hashmap
+        HashMap<Character, Integer> temp = new LinkedHashMap<Character, Integer>();
+        for (Map.Entry<Character, Integer> aa : list) {
+            temp.put(aa.getKey(), aa.getValue());
+        }
+        return temp;
+    }
+    private static HashMap<Character, Integer> CountChar(String str,int n){
+        Character ch;
+        Integer weight;
+        HashMap<Character, Integer> CountChar=new HashMap<Character,Integer>();
+        for (int i=0; i<n; i++){
+        ch = str.charAt(i);
+        //if(ch==' '){continue;}
+        if (CountChar.containsKey(ch) == false)
+        weight = 1;
+        else
+        weight = CountChar.get(ch) + 1;
+        CountChar.put(ch, weight);
+        }
+        return CountChar;
+    }
     public static void main(String[]args){
         Scanner s = new Scanner(System.in);
         String str=s.nextLine();
