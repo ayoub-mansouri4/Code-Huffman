@@ -51,6 +51,36 @@ public static void printCode(HuffmanNode root, String s)
             hn.right = null;
             q.add(hn);
         }
+          HuffmanNode root = null;
+
+        while (q.size() > 1) {
+
+
+            HuffmanNode x = q.peek();
+            q.poll();
+
+
+            HuffmanNode y = q.peek();
+            q.poll();
+
+            HuffmanNode f = new HuffmanNode();
+
+            
+            f.data = x.data + y.data;
+            f.c = '-';
+
+
+            f.left = x;
+
+
+            f.right = y;
+
+
+            root = f;
+
+            
+            q.add(f);
+        }
 
     }
 }
