@@ -18,19 +18,18 @@ class MyComparator implements Comparator<HuffmanNode> {
 }
 class public Huffman{
 // c'est une fonction recursive
-public static void printCode(HuffmanNode root, String s)
-        {
+    public static void printCode(HuffmanNode root, String s){
         // si root.left et root.right sont null
 
         if (root.left == null && root.right == null && Character.isLetter(root.c)) {
-        System.out.println(root.c + ":" + s);
-        return;
+            System.out.println(root.c + ":" + s);
+            return;
         }
 
 
         printCode(root.left, s + "0");
         printCode(root.right, s + "1");
-        }
+    }
 
     public static void main(String[]args){ 
         int n = 6;
@@ -52,7 +51,7 @@ public static void printCode(HuffmanNode root, String s)
             hn.right = null;
             q.add(hn);
         }
-          HuffmanNode root = null;
+        HuffmanNode root = null;
 
         while (q.size() > 1) {
 
@@ -82,7 +81,7 @@ public static void printCode(HuffmanNode root, String s)
             
             q.add(f);
         }
-          printCode(root, "");
+        printCode(root, "");
 
     }
 }
