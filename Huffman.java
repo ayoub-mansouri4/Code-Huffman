@@ -39,6 +39,18 @@ public static void printCode(HuffmanNode root, String s)
         int[] charfreq = { 5, 9, 12, 13, 16, 45 } ; 
         
         PriorityQueue<HuffmanNode> q = new PriorityQueue<HuffmanNode>(n, new MyComparator());
+        
+        for (int i = 0; i < n; i++) {
+
+            HuffmanNode hn = new HuffmanNode();
+
+            hn.c = charArray[i];
+            hn.data = charfreq[i];
+
+            hn.left = null;
+            hn.right = null;
+            q.add(hn);
+        }
 
     }
 }
