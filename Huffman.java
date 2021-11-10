@@ -81,6 +81,7 @@ public static void printCode(HuffmanNode root, String s)
             
             q.add(f);
         }
+          printCode(root, "");
 
     }
 }
