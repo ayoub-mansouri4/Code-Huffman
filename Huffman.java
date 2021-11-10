@@ -8,6 +8,7 @@ class HuffmanNode {
     HuffmanNode left;
     HuffmanNode right;
 }
+//le comparateur aide à comparer le Huffman Node
 class MyComparator implements Comparator<HuffmanNode> {
     public int compare(HuffmanNode x, HuffmanNode y)
     {
@@ -16,10 +17,10 @@ class MyComparator implements Comparator<HuffmanNode> {
     }
 }
 class public Huffman{
-
+// c'est une fonction recursive
 public static void printCode(HuffmanNode root, String s)
         {
-
+        // si root.left et root.right sont null
 
         if (root.left == null && root.right == null && Character.isLetter(root.c)) {
         System.out.println(root.c + ":" + s);
