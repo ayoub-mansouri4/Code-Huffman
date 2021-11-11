@@ -6,6 +6,7 @@
 * Ismail Mosleh 
 * Ayoub Mansouri 
 * Soufiane Jarraf
+* Alaa-Eddine Somate
 * Ibrahim Mestadi 
 
 ### Explanation of the Algorithm : 
